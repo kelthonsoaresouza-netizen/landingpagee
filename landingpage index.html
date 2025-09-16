@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentelab Saúde Integrada</title>
+    <meta name="description" content="Atendimento Psicológico Online e Presencial - Mentelab Saúde Integrada">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-start: #4A90E2;
+            --bg-end: #F9F9F6;
+            --text: #333333;
+            --muted: #7F8C8D;
+            --brand: #004D7F;
+            --accent: #00aaff;
+            --card: #FFFFFF;
+            --footer-bg: #2C3E50;
+            --dark-blue: #2C3E50;
+            --gray-dark: #4D4D4D;
+            --green-pastel: #A3D9A5;
+            --light-blue: #E6F2FF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--bg-end) 100%);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin-inline: auto;
+        }
+
+        /* Header e Navegação */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--card);
+            padding: 10px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--brand);
+        }
+
+        .brand span {
+            margin-left: 10px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background-color: var(--brand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            opacity: 0.85;
+            font-weight: 500;
+            padding: 6px 0;
+            position: relative;
+        }
+
+        nav a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: var(--bg-start);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn.primary {
+            background-color: var(--bg-start);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 40px;
+            padding: 80px 0;
+        }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 3.5vw + 1rem, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark-blue);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(45deg, var(--bg-start), var(--accent));
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.5rem, 2vw + 0.8rem, 2.5rem);
+            margin-bottom: 15px;
+            color: var(--dark-blue);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Grid e Cards */
+        .grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--brand);
+            font-size: 1.8rem;
+        }
+
+        .card h3 {
+            margin: 10px 0;
+            font-size: 1.3rem;
+            color: var(--dark-blue);
+        }
+
+        .card p {
+            color: var(--gray-dark);
+        }
+
+        /* Lista de vantagens */
+        .features-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-list li {
+            background-color: var(--card);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .features-list li i {
+            margin-right: 15px;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        /* Contato */
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-start);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background: var(--footer-bg);
+            color: white;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 60px 0;
+            }
+            
+            .hero-cta {
+                justify-content: center;
+            }
+            
+            .hero-image-placeholder {
+                height: 250px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--card);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <a href="#top" class="brand">
+                <div class="logo">M</div>
+                <span>Mentelab Saúde Integrada</span>
+            </a>
+
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav>
+                <ul id="menu">
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#specializations">Especializações</a></li>
+                    <li><a href="#why">Por Que Escolher</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero" id="top">
+            <div class="hero-content">
+                <h1>Cuide da sua saúde emocional com confiança e acolhimento</h1>
+                <p>Oferecemos serviços especializados de atendimento psicológico online e presencial para o seu bem-estar.</p>
+                <div class="hero-cta">
+                    <a href="#services" class="btn primary"><i class="fas fa-concierge-bell"></i> Veja nossos serviços</a>
+                    <a href="#contact" class="btn"><i class="fas fa-calendar-check"></i> Agende sua consulta</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">
+                    <i class="fas fa-brain"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="section-title">
+                <h2>Serviços Oferecidos</h2>
+                <p class="section-subtitle">Conheça nossos serviços especializados de atendimento psicológico</p>
+            </div>
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Terapia para Adultos</h3>
+                    <p>Tratamento para ansiedade, depressão, estresse e traumas com abordagens modernas e eficazes.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Terapia para Adolescentes</h3>
+                    <p>Suporte emocional e psicológico especializado para adolescentes em fase de desenvolvimento.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Terapia para Crianças</h3>
+                    <p>Tratamento psicológico lúdico para crianças em dificuldades emocionais e de desenvolvimento.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Psicoterapia de Casal</h3>
+                    <p>Apoio para casais que buscam melhorar o relacionamento, comunicação e intimidade.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="specializations" class="section">
+            <div class="section-title">
+                <h2>Áreas de Especialização</h2>
+                <p class="section-subtitle">Trabalhamos com foco em diversas especialidades da psicologia</p>
+            </div>
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Ansiedade e Estresse</h3>
+                    <p>Estratégias de manejo de estresse e redução de ansiedade para melhor qualidade de vida.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Depressão e Tristeza</h3>
+                    <p>Tratamento para lidar com depressão e fortalecer a autoestima e resiliência emocional.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <h3>Traumas e Superação</h3>
+                    <p>Foco na recuperação emocional de traumas e dificuldades passadas para seguir em frente.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Relacionamentos</h3>
+                    <p>Apoio para famílias, amigos e casais enfrentando dificuldades relacionais e de comunicação.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="why" class="section">
+            <div class="section-title">
+                <h2>Por que escolher a Mentelab?</h2>
+                <p class="section-subtitle">Conheça as vantagens de fazer terapia conosco</p>
+            </div>
+            <div class="features-list">
+                <li>
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Profissionais qualificados com especialização em neuropsicologia.</span>
+                </li>
+                <li>
+                    <i class="fas fa-laptop-house"></i>
+                    <span>Atendimento flexível, presencial ou online, de acordo com sua necessidade.</span>
+                </li>
+                <li>
+                    <i class="fas fa-hands-helping"></i>
+                    <span>Abordagem integrativa e holística de cuidado psicológico.</span>
+                </li>
+                <li>
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Ambiente acolhedor, confidencial e livre de julgamentos.</span>
+                </li>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+                <p class="section-subtitle">Agende sua consulta ou obtenha mais informações</p>
+            </div>
+            <div class="contact-buttons">
+                <a href="https://wa.me/5531992235608" class="cta-button">
+                    <i class="fab fa-whatsapp"></i> Agendar no WhatsApp
+                </a>
+                <a href="mailto:contato@mentelab.com" class="cta-button">
+                    <i class="far fa-envelope"></i> Enviar E-mail
+                </a>
+                <a href="https://www.instagram.com/mentelab__saude_integrada" target="_blank" class="cta-button">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="brand">
+                <div class="logo">M</div>
+                <span>Mentelab Saúde Integrada</span>
+            </div>
+            <div class="contact-info">
+                <p>Email: contato@mentelab.com | Telefone: +55(31)99223-5608</p>
+            </div>
+            <p>© 2023 Mentelab Saúde Integrada. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('menu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
